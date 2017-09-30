@@ -1,0 +1,202 @@
+{
+	"intents": [
+		{
+			"name": "jompayPayBill",
+			"samples": [
+				"Hi",
+				"Hello JomPAY Bot",
+				"I would like to pay {name} {date}",
+				"I would like to pay {name}",
+				"I would like to pay {name} {amount} {date}",
+				"I would like to make a payment",
+				"I would like to make a payment please",
+				"amount is {amount}",
+				"the amount is {amount}",
+				"pay {amount}",
+				"I would like to pay {amount} to {name} {date}",
+				"I would like to pay {amount} {name} {date}",
+				"I want to pay {name} {date}",
+				"I want to pay {name}",
+				"I want to pay {name} {amount} {date}",
+				"I want to make a payment",
+				"I want to make a payment please",
+				"Hello",
+				"Halo",
+				"Start over",
+				"Restart"
+			],
+			"slots": [
+				{
+					"name": "amount",
+					"type": "AMAZON.NUMBER",
+					"samples": []
+				},
+				{
+					"name": "date",
+					"type": "AMAZON.DATE",
+					"samples": []
+				},
+				{
+					"name": "name",
+					"type": "jompayBillerName",
+					"samples": []
+				}
+			]
+		},
+		{
+			"name": "jompayHelp",
+			"samples": [
+				"Help",
+				"Help me",
+				"Can anyone help"
+			],
+			"slots": []
+		}
+	],
+	"types": [
+		{
+			"name": "jompayBillerName",
+			"values": [
+				{
+					"name": {
+						"value": "CELCOM",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "MAXIS",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "TMNET",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "TNB",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "TENAGA",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "AIRASIA",
+						"synonyms": []
+					}
+				},
+				{
+					"name": {
+						"value": "SYABAS",
+						"synonyms": []
+					}
+				}
+			]
+		}
+	],
+	"prompts": [
+		{
+			"id": "Confirm.Intent-jompayPayBill",
+			"promptVersion": "1.0",
+			"definitionVersion": "1.0",
+			"variations": [
+				{
+					"type": "PlainText",
+					"value": "You'd like to pay {name} Ringgit Malaysia {amount} on {date}. Is that right?"
+				}
+			]
+		},
+		{
+			"id": "Elicit.Intent-jompayPayBill.IntentSlot-amount",
+			"promptVersion": "1.0",
+			"definitionVersion": "1.0",
+			"variations": [
+				{
+					"type": "PlainText",
+					"value": "How much you want to pay?"
+				},
+				{
+					"type": "PlainText",
+					"value": "How much is the amount?"
+				}
+			]
+		},
+		{
+			"id": "Elicit.Intent-jompayPayBill.IntentSlot-date",
+			"promptVersion": "1.0",
+			"definitionVersion": "1.0",
+			"variations": [
+				{
+					"type": "PlainText",
+					"value": "When (yyyy-mm-dd) do you want to pay?"
+				}
+			]
+		},
+		{
+			"id": "Elicit.Intent-jompayPayBill.IntentSlot-name",
+			"promptVersion": "1.0",
+			"definitionVersion": "1.0",
+			"variations": [
+				{
+					"type": "PlainText",
+					"value": "What is the biller's name?"
+				}
+			]
+		}
+	],
+	"dialog": {
+		"version": "1.0",
+		"intents": [
+			{
+				"name": "jompayPayBill",
+				"confirmationRequired": true,
+				"prompts": {
+					"confirm": "Confirm.Intent-jompayPayBill"
+				},
+				"slots": [
+					{
+						"name": "amount",
+						"type": "AMAZON.NUMBER",
+						"elicitationRequired": true,
+						"confirmationRequired": false,
+						"prompts": {
+							"elicit": "Elicit.Intent-jompayPayBill.IntentSlot-amount"
+						}
+					},
+					{
+						"name": "date",
+						"type": "AMAZON.DATE",
+						"elicitationRequired": true,
+						"confirmationRequired": false,
+						"prompts": {
+							"elicit": "Elicit.Intent-jompayPayBill.IntentSlot-date"
+						}
+					},
+					{
+						"name": "name",
+						"type": "jompayBillerName",
+						"elicitationRequired": true,
+						"confirmationRequired": false,
+						"prompts": {
+							"elicit": "Elicit.Intent-jompayPayBill.IntentSlot-name"
+						}
+					}
+				]
+			},
+			{
+				"name": "jompayHelp",
+				"confirmationRequired": false,
+				"prompts": {},
+				"slots": []
+			}
+		]
+	}
+}
